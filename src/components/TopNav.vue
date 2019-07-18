@@ -1,8 +1,15 @@
 <template>
   <transition name="fade">
-    <nav id="top-nav-bar" :class="{dark: darkMode}">
-      <button class="material-icons pointer" type="button" @click="toggleDarkMode">wb_sunny</button>
-    </nav>
+    <div class="top-bar-wrapper" :class="{dark: darkMode}">
+      <div class="container nopadding">
+        <nav class="top-bar">
+          <div class="links">
+            <router-link to="/" class="link">Inicio</router-link>
+          </div>
+          <button class="material-icons pointer" type="button" @click="toggleDarkMode">wb_sunny</button>
+        </nav>
+      </div>
+    </div>
   </transition>
 </template>
 
@@ -28,10 +35,25 @@ export default {
   opacity: 0;
 }
 
-#top-nav-bar {
+.top-bar-wrapper {
   &.dark {
-    button {
-      color: $blanquito;
+    background-color: $darkBG-hover;
+  }
+  background-color: $blanquito-main;
+  .top-bar {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    .links {
+      flex-grow: 1;
+      .link {
+        text-decoration: none;
+      }
+    }
+  }
+  &.dark {
+    button, a {
+      color: $blanquito-main;
     }
   }
   button {
@@ -42,10 +64,12 @@ export default {
   transition: all 0.3s ease;
   color: $colortexto;
   position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   left: 0;
   top: 0;
-  padding: 15px;
-  display: flex;
+  width: 100%;
   z-index: 10;
 }
 </style>

@@ -1,13 +1,15 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import VueCookies from 'vue-cookies'
 
 Vue.use(Vuex)
+Vue.use(VueCookies)
 
 export default new Vuex.Store({
   state: {
     darkMode: false,
     showTopNav: false,
-    lowerSectionHeight: 0 // <- lmaoooo paso loco
+    cookies: !!VueCookies.get('cookie-consent')
   },
   mutations: {
     toggleDarkMode (state) {
@@ -16,11 +18,8 @@ export default new Vuex.Store({
     toggleTopNav (state) {
       state.showTopNav = !state.showTopNav
     },
-    setTopNavFixed (state, fixed) {
-      state.showTopNav = fixed
-    },
-    setLowerSection (state, val) {
-      state.lowerSectionHeight = val
+    setConsent (state, consent) {
+      state.cookies = consent
     }
   },
   actions: {

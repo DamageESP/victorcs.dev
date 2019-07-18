@@ -2,21 +2,24 @@
   <div id="app" :class="{dark: darkMode}">
     <top-nav/>
     <div class="container">
+      <div style="width: 100%; height: 56px;"></div>
       <transition name="fade" mode="out-in">
         <router-view/>
       </transition>
     </div>
+    <CookieConsent/>
   </div>
 </template>
 
 <script>
 import TopNav from '@/components/TopNav'
+import CookieConsent from '@/components/CookieConsent'
 
 import { mapState } from 'vuex'
 
 export default {
   name: 'App',
-  components: { TopNav },
+  components: { TopNav, CookieConsent },
   computed: {
     ...mapState(['darkMode'])
   }
@@ -37,13 +40,13 @@ html, body {
   padding: 0;
 }
 .dark {
-  color: $blanquito;
-  background-color: $colortexto;
+  color: $blanquito-main;
+  background-color: $darkBG-main;
 }
 #app {
   &.dark {
-    color: $blanquito;
-    background-color: $colortexto;
+    color: $blanquito-main;
+    background-color: $darkBG-main;
   }
   transition: all 0.3s ease;
   font-family: $fuentedefault;
@@ -60,6 +63,9 @@ html, body {
   display: flex;
   justify-content: center;
   .container {
+    &.nopadding {
+      padding: 0;
+    }
     padding: 15px;
     max-width: 1200px;
     width: 1200px;

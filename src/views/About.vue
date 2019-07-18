@@ -20,22 +20,18 @@
         </div>
       </div>
     </div>
-    <router-link to="/">
-      <Boton pulse accent="red">Back</Boton>
-    </router-link>
   </div>
 </template>
 
 <script>
 import SkillCard from '@/components/SkillCard'
-import Boton from '@/components/Boton'
 import Card from '@/components/Card'
 
 import skills from '../skills'
 
 export default {
   name: 'About',
-  components: { SkillCard, Boton, Card },
+  components: { SkillCard, Card },
   data() {
     return {
       columns: skills

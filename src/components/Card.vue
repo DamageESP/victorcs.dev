@@ -21,10 +21,10 @@ export default {
 .card {
   &.dark {
     &:hover {
-      background: rgb(60, 60, 60);  
+      background: $darkBG-hover;
     }
-    background: rgb(50, 50, 50);
-    color: $blanquito;
+    background: $darkBG-secondary;
+    color: $blanquito-main;
   }
   &:hover {
     /* background: rgba(0, 0, 0, .02); */
@@ -33,7 +33,7 @@ export default {
   /* width: 350px; */
   color: $colortexto;
   display: flex;
-  background: rgb(253, 253, 253);
+  background: $blanquito-secondary;
   margin: 10px;
   transition: all 0.5s ease;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, .07);
