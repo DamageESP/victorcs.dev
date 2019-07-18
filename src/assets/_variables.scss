@@ -1,0 +1,64 @@
+$lightblue: #91B9FF;
+$blue: #6DA2FF;
+$red: #FF6D6D;
+$lightred: #FF9A9A;
+$blanco: white;
+$blanquito: #f7f7f7;
+$colortexto: rgb(32, 32, 32);
+$gradiente: linear-gradient(45deg, $red 15%, $blue 100%);
+$fuentedefault: 'Work Sans', sans-serif;
+$textoxl: 32px;
+$textomd: 20px;
+$textosm: 12px;
+
+@mixin breakpoint-up ($size) {
+  @if $size=='sm' {
+    @media screen and (min-width: 576px) {
+      @content;
+    }
+  }
+
+  @else if $size=='md' {
+    @media screen and (min-width: 768px) {
+      @content;
+    }
+  }
+
+  @else if $size=='lg' {
+    @media screen and (min-width: 992px) {
+      @content;
+    }
+  }
+
+  @else if $size=='xl' {
+    @media screen and (min-width: 1200px) {
+      @content;
+    }
+  }
+}
+
+@mixin breakpoint-down ($size) {
+  @if $size=='xs' {
+    @media screen and (max-width: 575.98px) {
+      @content;
+    }
+  }
+
+  @else if $size=='sm' {
+    @media screen and (max-width: 767.98px) {
+      @content;
+    }
+  }
+
+  @else if $size=='md' {
+    @media screen and (max-width: 991.98px) {
+      @content;
+    }
+  }
+
+  @else if $size=='lg' {
+    @media screen and (max-width: 1199.98px) {
+      @content;
+    }
+  }
+}

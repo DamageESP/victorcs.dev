@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="1920" height="500" viewBox="0 0 1920 500">
+  <defs>
+    <style>
+      .cls-1, .cls-2, .cls-3 {
+        fill: #ff6d6d;
+        fill-rule: evenodd;
+      }
+
+      .cls-1 {
+        filter: url(#filter-chain-1);
+      }
+
+      .cls-2, .cls-3 {
+        filter: url(#filter-chain-2);
+      }
+
+      .cls-3 {
+        fill-opacity: 0;
+      }
+    </style>
+
+    <filter id="filter-chain-1" filterUnits="userSpaceOnUse">
+      <feOffset dx="2.828" dy="2.828" in="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="5.745" result="dropBlur"/>
+      <feFlood flood-opacity="0.35"/>
+      <feComposite operator="in" in2="dropBlur" result="dropShadowComp"/>
+      <feComposite in="SourceGraphic" result="shadowed"/>
+      <feFlood flood-color="#91b9ff"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+      <feBlend in2="shadowed" result="solidFill"/>
+      <feOffset dx="2.121" dy="2.121" in="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="10.954" result="innerShadowBlur"/>
+      <feFlood flood-opacity="0.35"/>
+      <feComposite operator="out" in2="innerShadowBlur"/>
+      <feComposite operator="in" in2="SourceAlpha"/>
+      <feBlend mode="multiply" in2="solidFill" result="innerShadow"/>
+    </filter>
+    <filter id="filter-chain-2" filterUnits="userSpaceOnUse">
+      <feOffset dx="2.828" dy="2.828" in="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="5.745" result="dropBlur"/>
+      <feFlood flood-opacity="0.35"/>
+      <feComposite operator="in" in2="dropBlur" result="dropShadowComp"/>
+      <feComposite in="SourceGraphic" result="shadowed"/>
+      <feOffset dx="2.121" dy="2.121" in="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="10.954" result="innerShadowBlur"/>
+      <feFlood flood-opacity="0.35"/>
+      <feComposite operator="out" in2="innerShadowBlur"/>
+      <feComposite operator="in" in2="SourceAlpha"/>
+      <feBlend mode="multiply" in2="shadowed" result="innerShadow"/>
+    </filter>
+  </defs>
+  <path d="M21.469,99.211 C21.469,99.211 169.527,59.364 332.172,72.211 C470.652,83.150 558.118,144.362 712.222,155.415 C846.876,165.073 896.120,121.366 1133.289,141.286 C1310.687,156.186 1307.193,197.548 1473.792,202.626 C1653.857,208.114 1658.807,130.395 1824.248,166.426 C1952.660,194.393 1980.796,248.753 1980.796,248.753 L1963.602,462.071 L-64.409,305.633 L-59.610,97.448 L21.469,99.211 ZM1374.000,-202.000 L1728.000,-189.000 " class="cls-1"/>
+  <path d="M8.145,159.601 C8.145,159.601 154.978,115.452 317.928,123.549 C456.668,130.443 545.882,189.078 700.243,195.631 C835.122,201.356 883.070,156.231 1120.719,169.225 C1298.476,178.943 1296.190,220.389 1462.866,220.605 C1643.015,220.839 1645.696,143.007 1812.117,174.198 C1941.291,198.407 1971.000,251.923 1971.000,251.923 L1960.036,465.651 L-71.675,368.440 L-72.951,160.204 L8.145,159.601 Z" class="cls-2"/>
+  <path d="M-4.000,242.000 C-4.000,242.000 140.854,191.737 304.000,193.000 C442.908,194.075 534.500,248.920 689.000,249.000 C824.000,249.069 870.015,201.975 1108.000,205.000 C1286.008,207.262 1285.461,248.768 1452.000,242.000 C1632.000,234.685 1631.417,156.810 1799.000,181.000 C1929.074,199.776 1961.000,252.000 1961.000,252.000 L1961.000,824.000 L-87.000,857.000 L-85.000,246.000 L-4.000,242.000 Z" class="cls-3"/>
+</svg>
