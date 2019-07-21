@@ -2,7 +2,7 @@
   <div id="app" :class="{dark: darkMode}">
     <top-nav/>
     <div class="container">
-      <div style="width: 100%; height: 56px;"></div>
+      <div style="width: 100%; height: 64px;"></div>
       <transition name="fade" mode="out-in">
         <router-view/>
       </transition>

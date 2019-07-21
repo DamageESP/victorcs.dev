@@ -6,7 +6,18 @@
           <div class="links">
             <router-link to="/" class="link">Inicio</router-link>
           </div>
-          <button class="material-icons pointer" type="button" @click="toggleDarkMode">wb_sunny</button>
+          <div class="right-links">
+            <a class="link img" href="https://linkedin.com" target="_blank">
+              <img src="/social_linkedin.png" alt="Mi perfil en LinkedIn">
+            </a>
+            <a class="link img especialito" href="https://linkedin.com" target="_blank">
+              <img src="/social_github.png" alt="Mi perfil en LinkedIn">
+            </a>
+            <a class="link img" href="https://linkedin.com" target="_blank">
+              <img src="/social_twitter.png" alt="Mi perfil en LinkedIn">
+            </a>
+            <button class="material-icons pointer dark-mode-button" type="button" @click="toggleDarkMode">wb_sunny</button>
+          </div>
         </nav>
       </div>
     </div>
@@ -37,7 +48,17 @@ export default {
 
 .top-bar-wrapper {
   &.dark {
-    background-color: $darkBG-hover;
+    .top-bar {
+      .right-links {
+        .dark-mode-button {
+          background: $darkBG-hover;
+        }
+      }
+    }
+    .especialito {
+      filter: invert(1);
+    }
+    background-color: $darkBG-secondary;
   }
   background-color: $blanquito-main;
   .top-bar {
@@ -46,9 +67,35 @@ export default {
     align-items: center;
     .links {
       flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
       .link {
         text-decoration: none;
       }
+    }
+    .right-links {
+      .dark-mode-button {
+        padding: 5px;
+        border-radius: 50%;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, .07);
+        background: $blanquito-secondary;
+      }
+      .link {
+        margin-right: 20px;
+        text-decoration: none;
+        &.img {
+          width: 20px;
+          height: 20px;
+          img {
+            width: 100%;
+            height: auto;
+          }
+        }
+      }
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
     }
   }
   &.dark {

@@ -37,13 +37,13 @@ export default [
       {
         icon: '/vue.png',
         name: 'Vue (Router, VueX)',
-        level: 90,
+        level: 95,
         favorite: true
       },
       {
         icon: '/sass.jpg',
         name: 'SASS/SCSS',
-        level: 90,
+        level: 95,
         favorite: true
       },
       {
@@ -55,6 +55,12 @@ export default [
         icon: '/bootstrap.jpg',
         name: 'Bootstrap',
         level: 90
+      },
+      {
+        icon: '/react.png',
+        name: 'React',
+        level: 60,
+        favorite: true
       }
     ]
   },
@@ -94,7 +100,7 @@ export default [
     name: 'HERRAMIENTAS',
     skills: [
       {
-        icon: '/webpack.jpg',
+        icon: '/webpack.png',
         name: 'Webpack',
         favorite: true
       },
@@ -156,6 +162,31 @@ export default [
       {
         icon: '/whmcs.png',
         name: 'WHMCS',
+      }
+    ]
+  },
+  {
+    name: 'QUIERO APRENDER',
+    skills: [
+      {
+        icon: '/tensorflow.png',
+        name: 'TensorFlow',
+      },
+      {
+        icon: '/angular.png',
+        name: 'Angular',
+      },
+      {
+        icon: '/graphql.png',
+        name: 'GraphQL',
+      },
+      {
+        icon: '/reactnative.png',
+        name: 'React Native',
+      },
+      {
+        icon: '/cordova.png',
+        name: 'Cordova',
       }
     ]
   }

@@ -15,7 +15,7 @@
     <div class="about-inner">
       <div class="skill-column" v-for="(column, j) in sortedColumns" :key="j">
         <h3>{{ column.name }}</h3>
-        <div class="skills-container" :class="[column.name == 'HERRAMIENTAS' ? 'tools' : '']">
+        <div class="skills-container" :class="[(column.name === 'HERRAMIENTAS' || column.name === 'QUIERO APRENDER') ? 'tools' : '']">
           <skill-card v-for="(skill, i) in column.skills" :key="i" :skill="skill"></skill-card>
         </div>
       </div>
@@ -42,7 +42,7 @@ export default {
       const sorted = []
       this.columns.forEach(({ skills, ...c }) => 
         sorted.push({
-          skills: skills.sort((a, b) => a.favorite ? -1 : 1),
+          skills: skills.sort(a => a.favorite ? -1 : 1),
           ...c
         })
       )
