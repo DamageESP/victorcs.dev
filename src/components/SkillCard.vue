@@ -1,6 +1,6 @@
 <template>
   <Card class="skill">
-    <div class="skill-icon" :style="`background-image: url('${skill.icon}')`"></div>
+    <div class="skill-icon" :style="`background-image: url('${computedImageURL(skill.icon)}')`"></div>
     <div class="skill-body">
       <div class="skill-body-heading">{{ skill.name }}</div>
       <div class="skill-body-level" ref="level" v-if="skill.level">
@@ -37,6 +37,9 @@ export default {
     barRecalc () {
       if (!this.$refs.levelBar) return
       this.$refs.levelBar.style.width = `${this.skill.level}%`
+    },
+    computedImageURL (logoName) {
+      return require(`../assets/logos/${logoName}`)
     }
   },
   computed: {

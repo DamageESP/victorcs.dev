@@ -47,11 +47,9 @@ export default {
     ...mapMutations(['setConsent']),
     toggleConsent () {
       this.changedConsent = true
-      if (this.cookies === false) {
-        setTimeout(() => {
-          this.changedConsent = false
-        }, 1000)
-      }
+      setTimeout(() => {
+        this.changedConsent = false
+      }, 1000)
       this.setConsent(!this.cookies)
     }
   }

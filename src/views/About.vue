@@ -2,7 +2,7 @@
   <div class="about">
     <Card class="about-header">
       <transition appear name="fade-scale">
-        <img class="avatar" src="/me.jpg" alt="Víctor Campos Salado">
+        <img class="avatar" :src="computedImageURL('me.jpg')" alt="Víctor Campos Salado">
       </transition>
       <div class="about-content">
         <h1>Hola, soy <b class="lightblue">Víctor Campos</b></h1>
@@ -35,6 +35,11 @@ export default {
   data() {
     return {
       columns: skills
+    }
+  },
+  methods: {
+    computedImageURL (logoName) {
+      return require(`../assets/logos/${logoName}`)
     }
   },
   computed: {

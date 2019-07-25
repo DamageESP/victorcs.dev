@@ -4,19 +4,23 @@
       <div class="container nopadding">
         <nav class="top-bar">
           <div class="links">
-            <router-link to="/" class="link">Inicio</router-link>
+            <router-link to="/" class="link">
+              <img src="../assets/logo-50.webp" alt="VíctorCS Logo">
+              <span>Inicio</span>
+            </router-link>
           </div>
           <div class="right-links">
-            <a class="link img" href="https://linkedin.com" target="_blank">
-              <img src="/social_linkedin.png" alt="Mi perfil en LinkedIn">
+            <button class="material-icons pointer link" type="button" @click="toggleContactForm" v-ga="$ga.commands.trackContact.bind(this, 'Start - TopNav')">mail_outline</button>
+            <a class="link img" href="https://www.linkedin.com/in/victorcampossalado/" target="_blank">
+              <img :src="computedImageURL('social_linkedin.png')" alt="Mi perfil en LinkedIn">
             </a>
-            <a class="link img especialito" href="https://linkedin.com" target="_blank">
-              <img src="/social_github.png" alt="Mi perfil en LinkedIn">
+            <a class="link img especialito" href="https://github.com/DamageESP" target="_blank">
+              <img :src="computedImageURL('social_github.png')" alt="Mi perfil en LinkedIn">
             </a>
-            <a class="link img" href="https://linkedin.com" target="_blank">
+            <!-- <a class="link img" href="https://twitter.com/Victor26B" target="_blank">
               <img src="/social_twitter.png" alt="Mi perfil en LinkedIn">
-            </a>
-            <button class="material-icons pointer dark-mode-button" type="button" @click="toggleDarkMode">wb_sunny</button>
+            </a> -->
+            <button class="material-icons pointer dark-mode-button" type="button" @click="toggleDarkMode" v-ga="$ga.commands.trackDarkMode.bind(this, darkMode ? 'Disable' : 'Enable')">wb_sunny</button>
           </div>
         </nav>
       </div>
@@ -33,7 +37,10 @@ export default {
     ...mapState(['darkMode'])
   },
   methods: {
-    ...mapMutations(['toggleDarkMode'])
+    ...mapMutations(['toggleDarkMode', 'toggleContactForm']),
+    computedImageURL (logoName) {
+      return require(`../assets/logos/${logoName}`)
+    }
   }
 }
 </script>
@@ -71,7 +78,15 @@ export default {
       align-items: center;
       justify-content: flex-start;
       .link {
+        img {
+          width: 20px;
+          height: auto;
+          margin-right: 10px;
+        }
         text-decoration: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
     }
     .right-links {

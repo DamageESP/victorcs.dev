@@ -3,35 +3,66 @@
     <top-nav/>
     <div class="container">
       <div style="width: 100%; height: 64px;"></div>
-      <transition name="fade" mode="out-in">
+      <transition name="component-fade" mode="out-in">
         <router-view/>
       </transition>
     </div>
-    <CookieConsent/>
+    <Modal v-show="contactForm">
+      <div class="mail-modal-content">
+        <h2 v-if="decoded">Puedes enviarme un correo a</h2>
+        <h2 v-else>Desencripta mi dirección de correo</h2>
+        <a class="tag" @click="decodeEmail" :href="'mailto:' + emailAddress">{{ emailAddress }}</a>
+        <Boton v-ga="$ga.commands.trackContact.bind(this, 'Decrypt - Unlock Button')" v-if="!decoded" @click.native="decodeEmail" accent="blue" size="md"><i class="material-icons">lock_open</i></Boton>
+        <Boton v-else accent="red" size="md">
+          <a v-ga="$ga.commands.trackContact.bind(this, 'Send Mail - Envelope Button')" :href="'mailto:' + emailAddress"><i class="material-icons">mail</i></a>
+        </Boton>
+      </div>
+    </Modal>
+    <!-- <CookieConsent/> -->
   </div>
 </template>
 
 <script>
 import TopNav from '@/components/TopNav'
+import Modal from '@/components/Modal'
+import Boton from '@/components/Boton'
 import CookieConsent from '@/components/CookieConsent'
 
 import { mapState } from 'vuex'
 
 export default {
   name: 'App',
-  components: { TopNav, CookieConsent },
+  data() {
+    return  {
+      emailAddress: 'aG9sYUB2aWN0b3Jjcy5kZXY=',
+      decoded: false
+    }
+  },
+  components: { TopNav, CookieConsent, Modal, Boton },
+  methods: {
+    decodeEmail (e) {
+      if (!this.decoded) {
+        e.preventDefault()
+        this.$ga.event('Contact', 'Decrypt - String Tag')
+        this.emailAddress = atob(this.emailAddress) // Prevent crawlers from getting my email
+        this.decoded = true
+      } else {
+        this.$ga.event('Contact', 'Send Mail - String Tag')
+      }
+    }
+  },
   computed: {
-    ...mapState(['darkMode'])
+    ...mapState(['darkMode', 'contactForm'])
   }
 }
 </script>
 
 
 <style lang="scss">
-.fade-enter-active, .fade-leave-active {
+.component-fade-enter-active, .component-fade-leave-active {
   transition: all 0.5s ease;
 }
-.fade-enter, .fade-leave-to {
+.component-fade-enter, .component-fade-leave-to {
   opacity: 0;
 }
 
@@ -70,6 +101,25 @@ html, body {
     max-width: 1200px;
     width: 1200px;
   }
+  .mail-modal-content {
+    h2 {
+      margin-bottom: 10px;
+    }
+    .tag {
+      margin: 40px 0;
+    }
+    a {
+      color: white;
+    }
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+.muted {
+  color: gray;
 }
 .blue {
   color: $blue;

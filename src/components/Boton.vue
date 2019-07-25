@@ -1,6 +1,6 @@
 
 <template>
-  <button class="btn" :class="{ 'btn-blue': blue, 'btn-red': red, 'pulse': pulse }">
+  <button class="btn" :class="{ 'btn-blue': blue, 'btn-red': red, 'pulse': pulse, 'xl': xl, 'md': md, 'sm': sm }">
     <slot></slot>
   </button>
 </template>
@@ -10,6 +10,7 @@
     name: 'boton',
     props: {
       accent: String,
+      size: String,
       pulse: {
         type: Boolean,
         default: false
@@ -21,6 +22,15 @@
       },
       red () {
         return this.accent === 'red'
+      },
+      xl () {
+        return this.size === 'xl'
+      },
+      md () {
+        return this.size === 'md'
+      },
+      sm () {
+        return this.size === 'sm'
       }
     }
   }
@@ -99,11 +109,21 @@
     border: 0;
     outline: none;
     border-radius: 3px;
-    padding: 21px 50px;
-    font-size: 28px;
     color: white;
     box-shadow: 0px 3px 6px rgba(0, 0, 0, .16);
+    padding: 21px 50px;
+    font-size: 28px;
     margin: 25px 15px;
+    &.md {
+      padding: 15px 30px;
+      font-size: 20px;
+      margin: 15px 10px;
+    }
+    &.sm {
+      padding: 8px 20px;
+      font-size: 18px;
+      margin: 10px;
+    }
     &.btn-blue {
       &:hover {
         background: $lightblue;

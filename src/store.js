@@ -9,7 +9,8 @@ export default new Vuex.Store({
   state: {
     darkMode: false,
     showTopNav: false,
-    cookies: !!VueCookies.get('cookie-consent')
+    cookies: !!VueCookies.get('cookie-consent'),
+    contactForm: false
   },
   mutations: {
     toggleDarkMode (state) {
@@ -20,6 +21,9 @@ export default new Vuex.Store({
     },
     setConsent (state, consent) {
       state.cookies = consent
+    },
+    toggleContactForm (state) {
+      state.contactForm = !state.contactForm
     }
   },
   actions: {
