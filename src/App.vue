@@ -10,12 +10,14 @@
     <Modal v-show="contactForm">
       <div class="mail-modal-content">
         <h2 v-if="decoded">Puedes enviarme un correo a</h2>
-        <h2 v-else>Desencripta mi dirección de correo</h2>
-        <a class="tag" @click="decodeEmail" :href="'mailto:' + emailAddress">{{ emailAddress }}</a>
-        <Boton v-ga="$ga.commands.trackContact.bind(this, 'Decrypt - Unlock Button')" v-if="!decoded" @click.native="decodeEmail" accent="blue" size="md"><i class="material-icons">lock_open</i></Boton>
-        <Boton v-else accent="red" size="md">
-          <a v-ga="$ga.commands.trackContact.bind(this, 'Send Mail - Envelope Button')" :href="'mailto:' + emailAddress"><i class="material-icons">mail</i></a>
-        </Boton>
+        <h2 v-else>Descodifica mi dirección de correo</h2>
+        <a class="tag" @click="decodeEmailTag" :href="'mailto:' + emailAddress">{{ emailAddress }}</a>
+        <Boton v-if="!decoded" @click.native="decodeEmail" accent="blue" size="md"><i class="material-icons">lock_open</i></Boton>
+        <a v-else v-ga="$ga.commands.trackContact.bind(this, 'Send Mail - Envelope Button')" :href="'mailto:' + emailAddress">
+          <Boton accent="red" size="md">
+            <i class="material-icons">mail</i>
+          </Boton>
+        </a>
       </div>
     </Modal>
     <!-- <CookieConsent/> -->
@@ -41,6 +43,14 @@ export default {
   components: { TopNav, CookieConsent, Modal, Boton },
   methods: {
     decodeEmail (e) {
+      if (!this.decoded) {
+        e.preventDefault()
+        this.$ga.event('Contact', 'Decrypt - Unlock Button')
+        this.emailAddress = atob(this.emailAddress) // Prevent crawlers from getting my email
+        this.decoded = true
+      }
+    },
+    decodeEmailTag (e) {
       if (!this.decoded) {
         e.preventDefault()
         this.$ga.event('Contact', 'Decrypt - String Tag')
