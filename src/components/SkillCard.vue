@@ -12,8 +12,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-
 import Card from '@/components/Card'
 
 export default {
@@ -41,9 +39,6 @@ export default {
     computedImageURL (logoName) {
       return require(`../assets/logos/${logoName}`)
     }
-  },
-  computed: {
-    ...mapState(['darkMode'])
   }
 }
 </script>

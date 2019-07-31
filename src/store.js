@@ -7,7 +7,7 @@ Vue.use(VueCookies)
 
 export default new Vuex.Store({
   state: {
-    darkMode: false,
+    darkMode: window.matchMedia('(prefers-color-scheme: dark)').matches,
     showTopNav: false,
     cookies: !!VueCookies.get('cookie-consent'),
     contactForm: false

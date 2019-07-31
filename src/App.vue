@@ -80,10 +80,6 @@ html, body {
   margin: 0;
   padding: 0;
 }
-.dark {
-  color: $blanquito-main;
-  background-color: $darkBG-main;
-}
 #app {
   &.dark {
     color: $blanquito-main;
