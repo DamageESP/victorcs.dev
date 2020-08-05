@@ -222,6 +222,7 @@ export default {
           text-align: center;
           text-shadow: 0px 0px 2px rgba(0, 0, 0, .8), 0px 1px 0px rgba(0, 0, 0, .8), 1px 0px 0px rgba(0, 0, 0, .8), 1px 1px 0px rgba(0, 0, 0, .8);
           background: rgba(255, 255, 255, .3);
+          color: white;
           white-space: nowrap;
           overflow: hidden;
           padding: 5px;
