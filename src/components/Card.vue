@@ -18,6 +18,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.fade-scale-enter-active, .fade-scale-leave-active {
+  transition: all 0.5s ease;
+}
+.fade-scale-enter, .fade-scale-leave-to {
+  transform: scale(0) translateY(-200px);
+  opacity: 0;
+}
+
 .card {
   &.dark {
     &:hover {
@@ -27,17 +35,13 @@ export default {
     color: $blanquito-main;
   }
   &:hover {
-    /* background: rgba(0, 0, 0, .02); */
     box-shadow: 0px 0px 25px rgba(0, 0, 0, .1);
   }
-  /* width: 350px; */
   color: $colortexto;
   display: flex;
   background: $blanquito-secondary;
-  margin: 10px;
   transition: all 0.5s ease;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, .07);
-  padding: 15px 10px;
   border-radius: 5px;
 }
 

@@ -6,9 +6,10 @@ $blanco: white;
 $blanquito-main: #f7f7f7;
 $blanquito-secondary: rgb(253, 253, 253);
 $colortexto: rgb(32, 32, 32);
-$darkBG-main: rgb(32, 32, 32);
-$darkBG-secondary:  rgb(50, 50, 50);
-$darkBG-hover: rgb(60, 60, 60);
+$muted: rgb(149, 152, 154);
+$darkBG-main: rgb(15, 15, 26);
+$darkBG-secondary:  rgb(30, 30, 40);
+$darkBG-hover: rgb(40, 40, 56);
 $gradiente: linear-gradient(45deg, $red 15%, $blue 100%);
 $fuentedefault: 'Work Sans', sans-serif;
 $textoxl: 32px;
@@ -16,25 +17,25 @@ $textomd: 20px;
 $textosm: 12px;
 
 @mixin breakpoint-up ($size) {
-  @if $size=='sm' {
+  @if $size=='xs' {
     @media screen and (min-width: 576px) {
       @content;
     }
   }
 
-  @else if $size=='md' {
+  @else if $size=='sm' {
     @media screen and (min-width: 768px) {
       @content;
     }
   }
 
-  @else if $size=='lg' {
+  @else if $size=='md' {
     @media screen and (min-width: 992px) {
       @content;
     }
   }
 
-  @else if $size=='xl' {
+  @else if $size=='lg' {
     @media screen and (min-width: 1200px) {
       @content;
     }

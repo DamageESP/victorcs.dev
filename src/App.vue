@@ -1,101 +1,170 @@
 <template>
-  <div id="app" :class="{dark: darkMode}">
-    <top-nav/>
+  <div
+    id="app"
+    :class="{ dark: darkMode }"
+  >
+    <top-nav />
     <div class="container">
-      <div style="width: 100%; height: 64px;"></div>
-      <transition name="component-fade" mode="out-in">
-        <router-view/>
+      <div style="width: 100%; height: 64px;" />
+      <transition
+        name="component-fade"
+        mode="out-in"
+      >
+        <router-view />
       </transition>
     </div>
     <Modal v-show="contactForm">
       <div class="mail-modal-content">
-        <h2 v-if="decoded">Puedes enviarme un correo a</h2>
-        <h2 v-else>Descodifica mi dirección de correo</h2>
-        <a class="tag" @click="decodeEmailTag" :href="'mailto:' + emailAddress">{{ emailAddress }}</a>
-        <Boton v-if="!decoded" @click.native="decodeEmail" accent="blue" size="md"><i class="material-icons">lock_open</i></Boton>
-        <a v-else v-ga="$ga.commands.trackContact.bind(this, 'Send Mail - Envelope Button')" :href="'mailto:' + emailAddress">
-          <Boton accent="red" size="md">
+        <h2 v-if="decoded">
+          Puedes enviarme un correo a
+        </h2>
+        <h2 v-else>
+          Descodifica mi dirección de correo
+        </h2>
+        <a
+          class="tag"
+          :href="'mailto:' + emailAddress"
+          @click="decodeEmailTag"
+        >{{ emailAddress }}</a>
+        <Boton
+          v-if="!decoded"
+          accent="blue"
+          size="md"
+          @click.native="decodeEmail"
+        >
+          <i class="material-icons">lock_open</i>
+        </Boton>
+        <a
+          v-else
+          v-ga="
+            $ga.commands.trackContact.bind(this, 'Send Mail - Envelope Button')
+          "
+          :href="'mailto:' + emailAddress"
+        >
+          <Boton
+            accent="red"
+            size="md"
+          >
             <i class="material-icons">mail</i>
           </Boton>
         </a>
       </div>
     </Modal>
-    <!-- <CookieConsent/> -->
+    <CookieConsent />
   </div>
 </template>
 
 <script>
-import TopNav from '@/components/TopNav'
-import Modal from '@/components/Modal'
-import Boton from '@/components/Boton'
-import CookieConsent from '@/components/CookieConsent'
+import TopNav from "@/components/TopNav";
+import Modal from "@/components/Modal";
+import Boton from "@/components/Boton";
+import CookieConsent from "@/components/CookieConsent";
 
-import { mapState } from 'vuex'
+import { mapState } from "vuex";
 
 export default {
-  name: 'App',
-  data() {
-    return  {
-      emailAddress: 'aG9sYUB2aWN0b3Jjcy5kZXY=',
-      decoded: false
-    }
-  },
+  name: "App",
   components: { TopNav, CookieConsent, Modal, Boton },
-  methods: {
-    decodeEmail (e) {
-      if (!this.decoded) {
-        e.preventDefault()
-        this.$ga.event('Contact', 'Decrypt - Unlock Button')
-        this.emailAddress = atob(this.emailAddress) // Prevent crawlers from getting my email
-        this.decoded = true
-      }
-    },
-    decodeEmailTag (e) {
-      if (!this.decoded) {
-        e.preventDefault()
-        this.$ga.event('Contact', 'Decrypt - String Tag')
-        this.emailAddress = atob(this.emailAddress) // Prevent crawlers from getting my email
-        this.decoded = true
-      } else {
-        this.$ga.event('Contact', 'Send Mail - String Tag')
-      }
-    }
+  data() {
+    return {
+      emailAddress: "aG9sYUB2aWN0b3Jjcy5kZXY=",
+      decoded: false,
+    };
   },
   computed: {
-    ...mapState(['darkMode', 'contactForm'])
-  }
-}
+    ...mapState(["darkMode", "contactForm"]),
+  },
+  methods: {
+    decodeEmail(e) {
+      if (!this.decoded) {
+        e.preventDefault();
+        this.$ga.event("Contact", "Decrypt - Unlock Button");
+        this.emailAddress = atob(this.emailAddress); // Prevent crawlers from getting my email
+        this.decoded = true;
+      }
+    },
+    decodeEmailTag(e) {
+      if (!this.decoded) {
+        e.preventDefault();
+        this.$ga.event("Contact", "Decrypt - String Tag");
+        this.emailAddress = atob(this.emailAddress); // Prevent crawlers from getting my email
+        this.decoded = true;
+      } else {
+        this.$ga.event("Contact", "Send Mail - String Tag");
+      }
+    },
+  },
+};
 </script>
 
 
 <style lang="scss">
-.component-fade-enter-active, .component-fade-leave-active {
-  transition: all 0.5s ease;
+.component-fade-enter-active,
+.component-fade-leave-active {
+  transition: all 0.3s ease;
 }
-.component-fade-enter, .component-fade-leave-to {
+.component-fade-enter,
+.component-fade-leave-to {
   opacity: 0;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
 }
 #app {
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-image: radial-gradient(
+        ellipse closest-side,
+        rgba(255, 255, 255, 0.75),
+        $blanquito-main
+      ),
+      url("./assets/logo.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.75;
+  }
   &.dark {
-    color: $blanquito-main;
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0.75;
+      background-image: radial-gradient(
+          ellipse closest-side,
+          rgba(0, 0, 0, 0.75),
+          $darkBG-main
+        ),
+        url("./assets/logo.png");
+    }
     background-color: $darkBG-main;
+    color: $blanquito-main;
   }
   transition: all 0.3s ease;
   font-family: $fuentedefault;
-  background: $blanco;
+  background: $blanquito-main;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: $colortexto;
-  background-image: url('./assets/headerBG2.png');
+  /* background-image: url('./assets/headerBG2.png');
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-position: 80% 80%;
-  background-size: contain;
+  background-size: contain; */
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -103,6 +172,8 @@ html, body {
     &.nopadding {
       padding: 0;
     }
+    position: relative;
+    z-index: 1;
     padding: 15px;
     max-width: 1200px;
     width: 1200px;
@@ -142,8 +213,10 @@ html, body {
   padding: 3px 6px;
   border-radius: 3px;
   font-weight: normal;
+  white-space: nowrap;
 }
-h1, h2 {
+h1,
+h2 {
   font-weight: normal;
   margin: 0;
   padding: 0;

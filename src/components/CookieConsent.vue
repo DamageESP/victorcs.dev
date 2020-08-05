@@ -1,22 +1,46 @@
 <template>
   <transition name="toggle">
     <div>
-      <div class="cookie-wrapper" :class="{dark: darkMode, 'cookies-off' : changedConsent}" @click="toggleConsent">
-        <div class="cookie" :class="{'no-cookies': !cookies}">
-          <img src="../assets/galleta.png" alt="Cookies">
+      <div
+        class="cookie-wrapper"
+        :class="{dark: darkMode, 'cookies-off' : changedConsent}"
+        @click="toggleConsent"
+      >
+        <div
+          class="cookie"
+          :class="{'no-cookies': !cookies}"
+        >
+          <img
+            src="../assets/galleta.png"
+            alt="Cookies"
+          >
         </div>
         <transition name="toggle">
-          <span v-if="changedConsent" class="cookie-changed">Cookies <span :class="cookies ? 'blue' : 'red'">{{ cookies ? 'ON' : 'OFF' }}</span></span>
+          <span
+            v-if="changedConsent"
+            class="cookie-changed"
+          >Cookies <span :class="cookies ? 'blue' : 'red'">{{ cookies ? 'ON' : 'OFF' }}</span></span>
         </transition>
       </div>
       <transition name="toggle">
-        <div class="cookie-disclaimer-wrapper" v-if="!dismissed">
-          <Card class="cookie-disclaimer" @click.native="dismissed = !dismissed">
+        <div
+          v-if="showDisclaimer"
+          class="cookie-disclaimer-wrapper"
+        >
+          <Card
+            class="cookie-disclaimer"
+            @click.native="dismissed = !dismissed"
+          >
             <div class="cookie-disclaimer-text">
               <span style="margin-bottom: 5px;">Uso cookies porque me gustan las estadísticas. Son para uso personal, ¡no te preocupes!</span>
               <span>Si te molestan demasiado, puedes desactivarlas en cualquier momento desde la galletita de la esquina 👉</span>
             </div>
-            <div class="material-icons" @click.native="dismissed = !dismissed">close</div>
+            <div
+              class="material-icons"
+              @click.native="dismissed = !dismissed"
+            >
+              close
+            </div>
           </Card>
         </div>
       </transition>
@@ -28,7 +52,7 @@
 import { mapState, mapMutations } from 'vuex'
 
 import Card from '@/components/Card'
-import { setTimeout } from 'timers';
+import { setTimeout } from 'timers'
 
 export default {
   name: 'CookieConsent',
@@ -41,7 +65,10 @@ export default {
     }
   },
   computed: {
-    ...mapState(['darkMode', 'cookies'])
+    ...mapState(['darkMode', 'cookies']),
+    showDisclaimer() {
+      return !this.cookies && !this.dismissed
+    }
   },
   methods: {
     ...mapMutations(['setConsent']),
@@ -113,10 +140,12 @@ export default {
     &:hover {
       background: $gradiente;
     }
+    margin: 10px;
     background: $gradiente;
     color: $blanquito-main;
     cursor: pointer;
-    pointer-events: all; 
+    pointer-events: all;
+    padding: 15px;
     .cookie-disclaimer-text {
       font-size: 0.8rem;
       display: flex;

@@ -45,7 +45,7 @@ export default {
 
 .modal-wrapper {
   transition: all 0.2s ease;
-  background: rgba(0, 0, 0, .6);
+  background: rgba(0, 0, 0, .85);
   cursor: pointer;
   position: fixed;
   top: 0;

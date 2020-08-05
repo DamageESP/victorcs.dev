@@ -1,0 +1,9 @@
+{
+  "extends": ["plugin:prettier/recommended", "prettier/vue"],
+  "plugins": ["prettier"],
+  "rules": {
+    "prettier/prettier": ["error", {
+     "endOfLine":"auto"
+   }]
+  }
+}

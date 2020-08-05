@@ -44,16 +44,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.fade-scale-enter-active, .fade-scale-leave-active {
-  transition: all 0.5s ease;
-}
-.fade-scale-enter, .fade-scale-leave-to {
-  transform: scale(0) translateY(-200px);
-  opacity: 0;
-}
-
 .skill {
   max-width: 350px;
+  padding: 15px 10px;
+  margin: 10px;
   .skill-icon {
     width: 40px;
     height: 40px;
