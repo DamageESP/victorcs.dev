@@ -12,7 +12,8 @@
       <div class="project-content">
         <h1 class="project-content-title">
           {{ project.name }}
-          <template v-if="project.url"> ·
+          <template v-if="project.url">
+            ·
             <a
               :href="'//' + project.url"
               target="_blank"
@@ -27,16 +28,29 @@
           class="project-content-date"
         >{{ project.dateFrom }} - {{ project.dateTo }}</span>
         <div class="project-content-technologies">
-          <div class="project-technology" v-for="(technology, i) in project.technologies" :key="i" :style="{backgroundColor: getTechColor(technology.id)}">
+          <div
+            v-for="(technology, i) in project.technologies"
+            :key="i"
+            class="project-technology"
+            :style="{backgroundColor: getTechColor(technology.id)}"
+          >
             {{ technology.name }}
-            <SkillCard class="embedded-skill" :skill="technology" />
+            <SkillCard
+              class="embedded-skill"
+              :skill="technology"
+            />
           </div>
         </div>
         <p class="project-content-description">
           {{ project.description }}
         </p>
         <div class="project-content-actions">
-          <button type="button" class="project-details-button">DETALLES</button>
+          <button
+            type="button"
+            class="project-details-button"
+          >
+            DETALLES
+          </button>
         </div>
       </div>
     </div>

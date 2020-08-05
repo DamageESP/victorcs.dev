@@ -1,16 +1,38 @@
 <template>
   <div id="content">
-    <img class="avatar" :src="computedImageURL('me.jpg')" alt="Víctor Campos Salado">
+    <img
+      class="avatar"
+      :src="computedImageURL('me.jpg')"
+      alt="Víctor Campos Salado"
+    >
     <div class="main-content">
       <h1>Hola, soy <b class="lightblue">Víctor Campos</b></h1>
       <h2>y soy desarrollador web Full-Stack <span class="tag">por vocación</span>.</h2>
-      <transition appear name="slidedown">
-        <div ref="lowerSection" class="lower-section">
+      <transition
+        appear
+        name="slidedown"
+      >
+        <div
+          ref="lowerSection"
+          class="lower-section"
+        >
           <span class="quiet">¿Qué necesitas?<br></span>
           <router-link to="/about">
-            <boton pulse accent="blue">Saber más sobre mí</boton>
+            <boton
+              pulse
+              accent="blue"
+            >
+              Saber más sobre mí
+            </boton>
           </router-link>
-          <boton v-ga="$ga.commands.trackContact.bind(this, 'Start - CTA Index')" @click.native="toggleContactForm" pulse accent="red">Hablar conmigo</boton>
+          <boton
+            v-ga="$ga.commands.trackContact.bind(this, 'Start - CTA Index')"
+            pulse
+            accent="red"
+            @click.native="toggleContactForm"
+          >
+            Hablar conmigo
+          </boton>
         </div>
       </transition>
     </div>

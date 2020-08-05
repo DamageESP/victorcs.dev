@@ -1,20 +1,57 @@
 <template>
   <transition name="fade">
-    <nav class="top-bar-wrapper" :class="{dark: darkMode, scrolled}">
+    <nav
+      class="top-bar-wrapper"
+      :class="{dark: darkMode, scrolled}"
+    >
       <div class="container nopadding">
         <div class="top-bar">
-          <button type="button" class="burger" @click="showMobileMenu = !showMobileMenu">
-            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars" class="svg-inline--fa fa-bars fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"></path></svg>
+          <button
+            type="button"
+            class="burger"
+            @click="showMobileMenu = !showMobileMenu"
+          >
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              data-prefix="fas"
+              data-icon="bars"
+              class="svg-inline--fa fa-bars fa-w-14"
+              role="img"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 448 512"
+            ><path
+              fill="currentColor"
+              d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"
+            /></svg>
           </button>
-          <div class="links" :class="{showMobileMenu}">
-            <router-link to="/" class="link" @click.native="showMobileMenu = !showMobileMenu">
-              <img src="../assets/logo-50.webp" alt="VíctorCS Logo">
+          <div
+            class="links"
+            :class="{showMobileMenu}"
+          >
+            <router-link
+              to="/"
+              class="link"
+              @click.native="showMobileMenu = !showMobileMenu"
+            >
+              <img
+                src="../assets/logo-50.webp"
+                alt="VíctorCS Logo"
+              >
               <span>Inicio</span>
             </router-link>
-            <router-link to="/about" class="link" @click.native="showMobileMenu = !showMobileMenu">
+            <router-link
+              to="/about"
+              class="link"
+              @click.native="showMobileMenu = !showMobileMenu"
+            >
               <span>Sobre mí</span>
             </router-link>
-            <router-link to="/projects" class="link" @click.native="showMobileMenu = !showMobileMenu">
+            <router-link
+              to="/projects"
+              class="link"
+              @click.native="showMobileMenu = !showMobileMenu"
+            >
               <span>Proyectos</span>
             </router-link>
             <!-- <router-link to="/snippets" class="link">
@@ -22,17 +59,47 @@
             </router-link> -->
           </div>
           <div class="right-links">
-            <button class="material-icons pointer link" type="button" @click="toggleContactForm" v-ga="$ga.commands.trackContact.bind(this, 'Start - TopNav')">mail_outline</button>
-            <a class="link img" href="https://www.linkedin.com/in/victorcampossalado/" target="_blank" rel="noopener">
-              <img :src="computedImageURL('social_linkedin.png')" alt="Mi perfil en LinkedIn">
+            <button
+              v-ga="$ga.commands.trackContact.bind(this, 'Start - TopNav')"
+              class="material-icons pointer link"
+              type="button"
+              @click="toggleContactForm"
+            >
+              mail_outline
+            </button>
+            <a
+              class="link img"
+              href="https://www.linkedin.com/in/victorcampossalado/"
+              target="_blank"
+              rel="noopener"
+            >
+              <img
+                :src="computedImageURL('social_linkedin.png')"
+                alt="Mi perfil en LinkedIn"
+              >
             </a>
-            <a class="link img especialito" href="https://github.com/DamageESP" target="_blank" rel="noopener">
-              <img :src="computedImageURL('social_github.png')" alt="Mi perfil en LinkedIn">
+            <a
+              class="link img especialito"
+              href="https://github.com/DamageESP"
+              target="_blank"
+              rel="noopener"
+            >
+              <img
+                :src="computedImageURL('social_github.png')"
+                alt="Mi perfil en LinkedIn"
+              >
             </a>
             <!-- <a class="link img" href="https://twitter.com/Victor26B" target="_blank" rel="noopener">
               <img :src="computedImageURL('social_twitter.png')" alt="Mi perfil en LinkedIn">
             </a> -->
-            <button class="material-icons pointer dark-mode-button" type="button" @click="toggleDarkMode" v-ga="$ga.commands.trackDarkMode.bind(this, darkMode ? 'Disable' : 'Enable')">wb_sunny</button>
+            <button
+              v-ga="$ga.commands.trackDarkMode.bind(this, darkMode ? 'Disable' : 'Enable')"
+              class="material-icons pointer dark-mode-button"
+              type="button"
+              @click="toggleDarkMode"
+            >
+              wb_sunny
+            </button>
           </div>
         </div>
       </div>
@@ -54,6 +121,9 @@ export default {
   computed: {
     ...mapState(['darkMode'])
   },
+  mounted () {
+    window.addEventListener('scroll', this.checkScrolled)
+  },
   methods: {
     ...mapMutations(['toggleDarkMode', 'toggleContactForm']),
     computedImageURL (logoName) {
@@ -64,9 +134,6 @@ export default {
       else this.scrolled = false
     }
   },
-  mounted () {
-    window.addEventListener('scroll', this.checkScrolled)
-  }
 }
 </script>
 

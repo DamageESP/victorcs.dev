@@ -1,7 +1,13 @@
 <template>
-  <transition appear name="fade-scale">
-    <div class="card" :class="{dark: darkMode}">
-      <slot/>
+  <transition
+    appear
+    name="fade-scale"
+  >
+    <div
+      class="card"
+      :class="{dark: darkMode}"
+    >
+      <slot />
     </div>
   </transition>
 </template>

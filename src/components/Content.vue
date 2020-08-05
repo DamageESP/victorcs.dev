@@ -1,27 +1,37 @@
 <template>
   <div id="content-wrapper">
     <div id="content">
-      <img class="avatar" src="/me.jpg" alt="Víctor Campos Salado">
+      <img
+        class="avatar"
+        src="/me.jpg"
+        alt="Víctor Campos Salado"
+      >
       <div class="main-content">
         <h1>Hola, soy <b class="lightblue">Víctor Campos</b></h1>
         <h2>y soy desarrollador web Full-Stack <span class="tag">por vocación</span>.</h2>
-        <div ref="lowerSection" class="lower-section">
+        <div
+          ref="lowerSection"
+          class="lower-section"
+        >
           <span class="quiet">¿Qué necesitas?<br></span>
           <router-link to="/about">
-            <boton accent="blue">Saber más sobre mí</boton>
+            <boton accent="blue">
+              Saber más sobre mí
+            </boton>
           </router-link>
-          <boton accent="red">Hablar conmigo</boton>
+          <boton accent="red">
+            Hablar conmigo
+          </boton>
         </div>
       </div>
       <div id="dynContent">
-        <slot></slot>
+        <slot />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import anime from 'animejs'
 import Boton from '@/components/Boton'
 
 export default {

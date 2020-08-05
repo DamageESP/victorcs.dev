@@ -1,6 +1,12 @@
 <template>
-  <transition appear name="fade-scale">
-    <div class="modal-wrapper" @click="closeContactForm">
+  <transition
+    appear
+    name="fade-scale"
+  >
+    <div
+      class="modal-wrapper"
+      @click="closeContactForm"
+    >
       <Card class="modal">
         <slot />
       </Card>
@@ -9,14 +15,13 @@
 </template>
 
 <script>
-import Boton from '@/components/Boton'
 import Card from '@/components/Card'
 
 import { mapMutations } from 'vuex'
 
 export default {
   name: 'Modal',
-  components: { Boton, Card },
+  components: { Card },
   methods: {
     closeContactForm (e) {
       if (e.target.classList.contains('modal-wrapper')) {

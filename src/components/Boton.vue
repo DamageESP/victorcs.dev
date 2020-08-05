@@ -1,13 +1,16 @@
 
 <template>
-  <button class="btn" :class="{ 'btn-blue': blue, 'btn-red': red, 'pulse': pulse, 'xl': xl, 'md': md, 'sm': sm }">
-    <slot></slot>
+  <button
+    class="btn"
+    :class="{ 'btn-blue': blue, 'btn-red': red, 'pulse': pulse, 'xl': xl, 'md': md, 'sm': sm }"
+  >
+    <slot />
   </button>
 </template>
 
 <script>
   export default {
-    name: 'boton',
+    name: 'Boton',
     props: {
       accent: String,
       size: String,

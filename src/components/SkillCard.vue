@@ -1,13 +1,28 @@
 <template>
   <Card class="skill">
-    <div class="skill-icon" :style="`background-image: url('${computedImageURL(skill.icon)}')`"></div>
+    <div
+      class="skill-icon"
+      :style="`background-image: url('${computedImageURL(skill.icon)}')`"
+    />
     <div class="skill-body">
-      <div class="skill-body-heading">{{ skill.name }}</div>
-      <div class="skill-body-level" ref="level" v-if="skill.level">
-        <div class="skill-body-level-bar" ref="levelBar"></div>
+      <div class="skill-body-heading">
+        {{ skill.name }}
+      </div>
+      <div
+        v-if="skill.level"
+        ref="level"
+        class="skill-body-level"
+      >
+        <div
+          ref="levelBar"
+          class="skill-body-level-bar"
+        />
       </div>
     </div>
-    <div class="skill-favorite" v-if="skill.favorite"></div>
+    <div
+      v-if="skill.favorite"
+      class="skill-favorite"
+    />
   </Card>
 </template>
 
