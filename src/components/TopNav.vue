@@ -32,7 +32,7 @@
             <router-link
               to="/"
               class="link"
-              @click.native="showMobileMenu = !showMobileMenu"
+              @click.native="showMobileMenu = false"
             >
               <img
                 src="../assets/logo-50.webp"
@@ -43,14 +43,14 @@
             <router-link
               to="/about"
               class="link"
-              @click.native="showMobileMenu = !showMobileMenu"
+              @click.native="showMobileMenu = false"
             >
               <span>Sobre mí</span>
             </router-link>
             <router-link
               to="/projects"
               class="link"
-              @click.native="showMobileMenu = !showMobileMenu"
+              @click.native="showMobileMenu = false"
             >
               <span>Proyectos</span>
             </router-link>
@@ -148,6 +148,14 @@ export default {
 .top-bar-wrapper {
   &.dark {
     .top-bar {
+      .links {
+        @include breakpoint-down('md') {
+          background: rgba($darkBG-hover, .9);
+        }
+      }
+      .burger {
+        color: rgba($blanquito-main, .8);        
+      }
       .right-links {
         .dark-mode-button {
           background: $darkBG-hover;
@@ -171,7 +179,7 @@ export default {
     justify-content: space-between;
     .burger {
       width: 30px;
-      color: rgba($blanquito-main, .8);
+      color: rgba($darkBG-hover, .8);
       @include breakpoint-up('md') {
         display: none;
       }
@@ -185,7 +193,7 @@ export default {
         flex-direction: column;
         position: absolute;
         top: 50px;
-        background-color: $darkBG-hover;
+        background: rgba($blanquito-secondary, .9);
         padding: 10px;
         &:not(.showMobileMenu) {
           display: none;
@@ -200,7 +208,7 @@ export default {
         align-items: center;
 
         @include breakpoint-down('md') {
-          padding: 5px;
+          padding: 8px 25px;
         }
 
         @include breakpoint-up('md') {

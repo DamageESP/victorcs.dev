@@ -44,14 +44,14 @@
         <p class="project-content-description">
           {{ project.description }}
         </p>
-        <div class="project-content-actions">
+        <!-- <div class="project-content-actions">
           <button
             type="button"
             class="project-details-button"
           >
             DETALLES
           </button>
-        </div>
+        </div> -->
       </div>
     </div>
   </Card>
@@ -60,6 +60,7 @@
 <script>
 import Card from "@/components/Card";
 import SkillCard from "@/components/SkillCard";
+import { mapState } from 'vuex'
 
 import { getTechColor } from '../lib/technologies'
 
@@ -68,40 +69,27 @@ export default {
   components: { Card, SkillCard },
   props: {
     project: {
-      id: {
-        type: Number,
-        default: 0,
-      },
-      name: {
-        type: String,
-        default: "Sin título",
-      },
-      description: {
-        type: String,
-        default: "Sin descripción.",
-      },
-      dateFrom: {
-        type: String,
-        default: "Desde los inicios",
-      },
-      dateTo: {
-        type: String,
-        default: "Para siempre",
-      },
-      image: {
-        type: String,
-        default: require("../assets/projects/unknown.jpg"),
-      },
-      url: {
-        type: String,
-        default: "https://victorcs.dev",
-      },
-    },
+      type: Object,
+      default: () => {
+        return {
+          id: 0,
+          name: "Sin título",
+          description: "Sin descripción.",
+          dateFrom:  "Desde los inicios",
+          dateTo: "Para siempre",
+          image: require("../assets/projects/unknown.jpg"),
+          url: "https://victorcs.dev",
+        }
+      }
+    }
   },
   data() {
     return {
       vertical: false,
     };
+  },
+  computed: {
+    ...mapState(['darkMode'])
   },
   mounted() {
     this.checkWidth();
@@ -151,11 +139,18 @@ export default {
       }
     }
   }
+  &.dark {
+    .project-image {
+      background-color: $darkBG-hover;  
+    }
+  }
   .project-image {
     flex-basis: 40%;
     border-radius: 5px 0 0 5px;
     background-position: center;
     background-size: 100%;
+    background-repeat: no-repeat;
+    background-color: $blanquito-main;
   }
   .project-content-wrapper {
     flex-basis: 60%;
@@ -175,7 +170,6 @@ export default {
         font-weight: 600;
         font-size: 19px;
         a {
-          display: none;
           border-bottom: 1px solid $red;
           padding-bottom: 0.15rem;
           font-size: 16px;

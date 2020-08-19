@@ -32,7 +32,7 @@
           size="md"
           @click.native="decodeEmail"
         >
-          <i class="material-icons">lock_open</i>
+          <i class="material-icons">lock_open</i><span class="decode-label">Descodificar</span>
         </Boton>
         <a
           v-else
@@ -160,14 +160,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: $colortexto;
-  /* background-image: url('./assets/headerBG2.png');
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-position: 80% 80%;
-  background-size: contain; */
   min-height: 100vh;
   display: flex;
   justify-content: center;
+  & > .container {
+    margin-bottom: 70px;
+  }
   .container {
     &.nopadding {
       padding: 0;
@@ -179,6 +177,17 @@ body {
     width: 1200px;
   }
   .mail-modal-content {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 450px;
+    
+    @include breakpoint-down('md') {
+      width: 70vw;
+    }
+
     h2 {
       margin-bottom: 10px;
     }
@@ -188,11 +197,9 @@ body {
     a {
       color: white;
     }
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    .decode-label {
+      margin-left: 10px;
+    }
   }
 }
 .muted {
@@ -208,6 +215,7 @@ body {
   color: $red;
 }
 .tag {
+  display: inline-block;
   background: $gradiente;
   color: $blanco;
   padding: 3px 6px;
@@ -261,12 +269,6 @@ h2 {
       padding: 10px;
       max-width: 400px;
     }
-  }
-  h1 {
-    font-size: 20px;
-  }
-  h2 {
-    font-size: 14px;
   }
 }
 </style>

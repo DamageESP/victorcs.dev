@@ -34,12 +34,14 @@ export default {
   components: { Card },
   props: {
     skill: {
-      icon: String,
-      name: String,
-      level: Number,
-      favorite: {
-        type: Boolean,
-        default: false
+      type: Object,
+      default: () => {
+        return {
+          icon: '',
+          name: 'Tech',
+          level: 0,
+          favorite: false
+        }
       }
     }
   },

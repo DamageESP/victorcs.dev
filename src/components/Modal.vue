@@ -61,6 +61,7 @@ export default {
   justify-content: center;
   align-items: center;
   z-index: 200;
+
   .modal {
     cursor: auto;
   }

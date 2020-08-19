@@ -5,7 +5,7 @@
       :src="computedImageURL('me.jpg')"
       alt="Víctor Campos Salado"
     >
-    <div class="main-content">
+    <main class="main-content">
       <h1>Hola, soy <b class="lightblue">Víctor Campos</b></h1>
       <h2>y soy desarrollador web Full-Stack <span class="tag">por vocación</span>.</h2>
       <transition
@@ -16,15 +16,21 @@
           ref="lowerSection"
           class="lower-section"
         >
-          <span class="quiet">¿Qué necesitas?<br></span>
-          <router-link to="/about">
-            <boton
-              pulse
-              accent="blue"
-            >
-              Saber más sobre mí
-            </boton>
-          </router-link>
+          <span class="muted">¿Qué necesitas?<br></span>
+          <boton
+            pulse
+            accent="blue"
+            @click.native="$router.push('/about')"
+          >
+            Saber más sobre mí
+          </boton>
+          <boton
+            pulse
+            accent="blue"
+            @click.native="$router.push('/projects')"
+          >
+            Ver mis proyectos
+          </boton>
           <boton
             v-ga="$ga.commands.trackContact.bind(this, 'Start - CTA Index')"
             pulse
@@ -35,7 +41,7 @@
           </boton>
         </div>
       </transition>
-    </div>
+    </main>
   </div>
 </template>
 
@@ -49,7 +55,7 @@ export default {
   components: { Boton },
   data () {
     return {
-      showModal: false
+      showModal: false,
     }
   },
   methods: {
@@ -91,6 +97,9 @@ export default {
     text-align: center;
     h1 {
       margin-bottom: 10px;
+    }
+    h2 {
+      font-size: 15px;
     }
     .lower-section {
       margin-top: 80px;

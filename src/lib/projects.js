@@ -2,13 +2,13 @@ import technologies from './technologies.js'
 
 export default [
   {
-    id: 1,
+    id: 'dontry.coach',
     name: 'DONTRY.coach',
     url: 'dontry.coach',
     dateFrom: 'Agosto 2018',
     dateTo: 'Junio 2019',
     description:
-      'Aplicación elaborada en Ruby on Rails. También hace uso de VueJS en el panel de gestión.',
+      'Aplicación elaborada en Ruby on Rails. También hace uso extensivo de VueJS en un panel de administración.',
     image: 'dontry.png',
     technologies: [
       technologies.find((t) => t.id === 'ruby'),
@@ -22,7 +22,7 @@ export default [
     ],
   },
   {
-    id: 2,
+    id: 'webmonster.io',
     name: 'WebMonster',
     url: 'webmonster.io',
     dateFrom: 'Agosto 2018',
@@ -42,11 +42,11 @@ export default [
     ],
   },
   {
-    id: 3,
-    name: 'VictorCS - Web CV',
+    id: 'victorcs.dev',
+    name: 'VictorCS',
     url: 'victorcs.dev',
-    dateFrom: 'Agosto 2018',
-    dateTo: 'Junio 2019',
+    dateFrom: '2019',
+    dateTo: 'Permanentemente',
     description:
       'Web personal elaborada con VueJS con el objetivo de dar un poco más de información sobre mis habilidades.',
     image: 'victorcs.png',
@@ -58,7 +58,7 @@ export default [
     ],
   },
   {
-    id: 4,
+    id: 'palacioweb.com',
     name: 'Palacioweb HeadQuarters',
     url: '',
     dateFrom: 'Agosto 2018',
@@ -74,6 +74,26 @@ export default [
       technologies.find((t) => t.id === 'terminal'),
       technologies.find((t) => t.id === 'vue'),
       technologies.find((t) => t.id === 'sass'),
+      technologies.find((t) => t.id === 'nginx'),
+    ],
+  },
+  {
+    id: 'cgimemes.wtf',
+    name: 'CGI Memes',
+    url: 'cgimemes.wtf',
+    dateFrom: 'Abril 2020',
+    dateTo: 'Abril 2020',
+    description:
+      'Aplicación elaborada en VueJS y ExpressJS, haciendo uso de Docker y Docker-Compose para su posterior despliegue en un VPS en clouding.io. La realización del proyecto de principio a fin fue de aproximadamente 1 semana.',
+    image: 'cgimemes.png',
+    technologies: [
+      technologies.find((t) => t.id === 'node'),
+      technologies.find((t) => t.id === 'express'),
+      technologies.find((t) => t.id === 'docker'),
+      technologies.find((t) => t.id === 'terminal'),
+      technologies.find((t) => t.id === 'vue'),
+      technologies.find((t) => t.id === 'sass'),
+      technologies.find((t) => t.id === 'nginx'),
     ],
   },
 ]

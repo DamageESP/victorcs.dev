@@ -1,11 +1,20 @@
 <template>
-  <section class="projects">
-    <ProjectCard
-      v-for="(project, i) in projects"
-      :key="i"
-      :project="project"
-      @ver-detalle="verDetalle"
-    />
+  <section>
+    <h1 class="heading">
+      Mis proyectos
+    </h1>
+    <main class="projects">
+      <ProjectCard
+        v-for="(project, i) in projects"
+        :key="i"
+        :project="project"
+        @ver-detalle="verDetalle"
+      />
+      <span class="others">... y muchos más. Algunos de ellos los puedes ver <a
+        target="_blank"
+        href="https://github.com/DamageESP"
+      >en mi perfil de github</a>.</span>
+    </main>
   </section>
 </template>
 
@@ -23,14 +32,18 @@ export default {
     };
   },
   methods: {
-    verDetalle(projectName) {
-      console.log('coming soon', projectName)
+    // TODO: Implement detail view
+    verDetalle(projectId) {
+      return projectId
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
+.heading {
+  margin-bottom: 25px;
+}
 .projects {
   display: grid;
   grid-template-columns: repeat(3, 50fr);
@@ -48,6 +61,10 @@ export default {
 
   .project {
     cursor: pointer;
+  }
+  .others {
+    padding: 25px;
+    text-align: center;
   }
 }
 </style>

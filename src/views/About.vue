@@ -1,20 +1,35 @@
 <template>
   <main class="about">
-    <Card class="about-header">
-      <img class="avatar" :src="computedImageURL('me.jpg')" alt="Víctor Campos Salado">
+    <div class="about-header">
+      <img
+        class="avatar"
+        :src="computedImageURL('me2.jpg')"
+        alt="Víctor Campos Salado"
+      >
       <div class="about-content">
         <h1>Hola, soy <b class="lightblue">Víctor Campos</b></h1>
         <h2>y soy desarrollador web Full-Stack <span class="tag">por vocación</span>.</h2>
       </div>
-    </Card>
+    </div>
     <div class="about-intro">
       <h2>A lo largo de mis <span class="tag">10 años de experiencia</span> he trabajado con una amplia variedad de lenguajes y herramientas:</h2>
     </div>
     <div class="about-inner">
-      <div class="skill-column" v-for="(column, j) in sortedColumns" :key="j">
+      <div
+        v-for="(column, j) in sortedColumns"
+        :key="j"
+        class="skill-column"
+      >
         <h3>{{ column.name }}</h3>
-        <div class="skills-container" :class="[(column.name === 'HERRAMIENTAS' || column.name === 'QUIERO APRENDER') ? 'tools' : '']">
-          <skill-card v-for="(skill, i) in column.skills" :key="i" :skill="skill" />
+        <div
+          class="skills-container"
+          :class="[(column.name === 'HERRAMIENTAS' || column.name === 'QUIERO APRENDER') ? 'tools' : '']"
+        >
+          <skill-card
+            v-for="(skill, i) in column.skills"
+            :key="i"
+            :skill="skill"
+          />
         </div>
       </div>
     </div>
@@ -23,21 +38,15 @@
 
 <script>
 import SkillCard from '@/components/SkillCard'
-import Card from '@/components/Card'
 
 import skills from '../lib/skills'
 
 export default {
   name: 'About',
-  components: { SkillCard, Card },
+  components: { SkillCard },
   data () {
     return {
       columns: skills
-    }
-  },
-  methods: {
-    computedImageURL (logoName) {
-      return require(`../assets/logos/${logoName}`)
     }
   },
   computed: {
@@ -50,6 +59,11 @@ export default {
         })
       )
       return sorted
+    }
+  },
+  methods: {
+    computedImageURL (logoName) {
+      return require(`../assets/logos/${logoName}`)
     }
   }
 }
@@ -65,8 +79,8 @@ export default {
     align-items: center;
     padding: 15px;
 
-    @include breakpoint-down('md') {
-      flex-direction: column;
+    @include breakpoint-down('sm') {
+      margin-bottom: 20px;
     }
 
     .avatar {
@@ -75,6 +89,11 @@ export default {
       width: 250px;
       height: 250px;
       margin: 15px;
+      
+      @include breakpoint-down(md) {
+        width: 150px;
+        height: 150px;
+      }
     }
     .about-content {
       display: flex;
@@ -97,6 +116,10 @@ export default {
   .about-intro {
     text-align: center;
     margin-bottom: 50px;
+
+    @include breakpoint-down('sm') {
+      margin-bottom: 20px;
+    }
   }
   .about-inner {
     display: flex;
@@ -132,38 +155,4 @@ export default {
   transform: scale(0);
   opacity: 0;
 }
-
-@include breakpoint-down(md) {
-  .about {
-    .about-header {
-      .avatar {
-        width: 150px;
-        height: 150px;
-      }
-    }
-  }
-}
-
-@include breakpoint-down(sm) {
-  .about {
-    .about-header {
-      .avatar {
-        width: 100px;
-        height: 100px;
-      }
-    }
-  }
-}
-
-@include breakpoint-down(xs) {
-  .about {
-    .about-header {
-      .avatar {
-        width: 75px;
-        height: 75px;
-      }
-    }
-  }
-}
 </style>
-

@@ -4,7 +4,9 @@
     class="btn"
     :class="{ 'btn-blue': blue, 'btn-red': red, 'pulse': pulse, 'xl': xl, 'md': md, 'sm': sm }"
   >
-    <slot />
+    <span class="btnLabel">
+      <slot />
+    </span>
   </button>
 </template>
 
@@ -12,11 +14,17 @@
   export default {
     name: 'Boton',
     props: {
-      accent: String,
-      size: String,
+      accent: {
+        type: String,
+        default: 'blue',
+      },
+      size: {
+        type: String,
+        default: 'md',
+      },
       pulse: {
         type: Boolean,
-        default: false
+        default: false,
       }
     },
     computed: {
@@ -40,7 +48,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @for $i from 1 through 2 {
+  @for $i from 1 through 5 {
     .btn {
       &:nth-child(#{$i}) {
         animation-delay: $i * (250ms);
@@ -92,9 +100,6 @@
   .btn {
     &:hover {
       box-shadow: 5px 3px 16px rgba(0, 0, 0, .16);
-      /* animation-name: aura;
-      animation-duration: 5s;
-      animation-iteration-count: infinite; */
     }
     &:active {
       box-shadow: inset 5px 3px 16px rgba(0, 0, 0, .16);
@@ -138,6 +143,10 @@
         background: $lightred;
       }
       background: $red;
+    }
+    .btnLabel {
+      display: flex;
+      align-items: center;
     }
   }
   @include breakpoint-down(md) {
