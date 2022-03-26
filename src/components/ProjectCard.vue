@@ -1,44 +1,40 @@
 <template>
-  <Card
-    class="project"
-    :class="{ vertical }"
-    @click.native="$emit('ver-detalle', project.id)"
-  >
-    <div
+  <Card class="project" :class="{ vertical, dark: darkMode }">
+    <a
       class="project-image"
-      :style="{ backgroundImage: processedImage(project.image) }"
-    />
+      :style="{ backgroundImage: `url(/src/assets/projects/${project.image})` }"
+      :href="project.url || project.codeUrl"
+      target="_blank"
+      rel="noopener"
+    ></a>
     <div class="project-content-wrapper">
       <div class="project-content">
-        <h1 class="project-content-title">
+        <div class="project-content-title">
           {{ project.name }}
           <template v-if="project.url">
             ·
-            <a
-              :href="'//' + project.url"
-              target="_blank"
-              rel="noopener"
-            >
-              {{ project.url }}
-              <i class="material-icons">open_in_new</i>
+            <a :href="'//' + project.url" target="_blank" rel="noopener">
+              <i class="material-icons-outlined">open_in_new</i>
             </a>
           </template>
-        </h1>
-        <span
-          class="project-content-date"
-        >{{ project.dateFrom }} - {{ project.dateTo }}</span>
+          <template v-if="project.codeUrl">
+            ·
+            <a :href="project.codeUrl" target="_blank" rel="noopener">
+              <i class="material-icons-outlined">code</i>
+            </a>
+          </template>
+        </div>
+        <span class="project-content-date"
+          >{{ project.dateFrom }} - {{ project.dateTo }}</span
+        >
         <div class="project-content-technologies">
           <div
             v-for="(technology, i) in project.technologies"
             :key="i"
             class="project-technology"
-            :style="{backgroundColor: getTechColor(technology.id)}"
+            :style="{ backgroundColor: getTechColor(technology) }"
           >
-            {{ technology.name }}
-            <SkillCard
-              class="embedded-skill"
-              :skill="technology"
-            />
+            {{ technology }}
           </div>
         </div>
         <p class="project-content-description">
@@ -57,72 +53,45 @@
   </Card>
 </template>
 
-<script>
-import Card from "@/components/Card";
-import SkillCard from "@/components/SkillCard";
-import { mapState } from 'vuex'
+<script setup lang="ts">
+import { onMounted, ref, toRefs, type PropType } from "vue";
+import Card from "@/components/Card.vue";
+import { getTechColor } from "@/lib/skills";
+import type { Project } from "@/lib/types";
+import { useAppStore } from "@/stores/app";
 
-import { getTechColor } from '../lib/technologies'
+defineProps({
+  project: {
+    type: Object as PropType<Project>,
+    required: true,
+  },
+});
 
-export default {
-  name: "ProjectCard",
-  components: { Card, SkillCard },
-  props: {
-    project: {
-      type: Object,
-      default: () => {
-        return {
-          id: 0,
-          name: "Sin título",
-          description: "Sin descripción.",
-          dateFrom:  "Desde los inicios",
-          dateTo: "Para siempre",
-          image: require("../assets/projects/unknown.jpg"),
-          url: "https://victorcs.dev",
-        }
-      }
-    }
-  },
-  data() {
-    return {
-      vertical: false,
-    };
-  },
-  computed: {
-    ...mapState(['darkMode'])
-  },
-  mounted() {
-    this.checkWidth();
-    window.addEventListener("resize", this.checkWidth);
-  },
-  methods: {
-    processedImage(url) {
-      return `url(${require(`../assets/projects/${url}`)})`;
-    },
-    checkWidth() {
-      if (window.innerWidth > 600) {
-        this.vertical = true;
-      } else this.vertical = false;
-    },
-    getTechColor(techId) {
-      return getTechColor(techId)
-    }
-  },
+const { darkMode } = toRefs(useAppStore());
+const vertical = ref(false);
+
+const checkWidth = () => {
+  if (window.innerWidth > 600) {
+    vertical.value = true;
+  } else vertical.value = false;
 };
+
+onMounted(() => {
+  checkWidth();
+  window.addEventListener("resize", checkWidth);
+});
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/variables";
 .project {
-  display: flex;
   width: 100%;
   height: 100%;
   &.vertical {
     flex-direction: column;
     .project-image {
       transition: background-size 0.2s ease-in-out;
-      &:hover {
-        background-size: 115%;
-      }
+      background-size: cover;
       flex-basis: initial;
       width: 100%;
       height: 300px;
@@ -130,18 +99,11 @@ export default {
     }
     .project-content-wrapper {
       flex-basis: 25%;
-      .project-content {
-        .project-content-title {
-          a {
-            display: initial;
-          }
-        }
-      }
     }
   }
   &.dark {
     .project-image {
-      background-color: $darkBG-hover;  
+      background-color: $darkBG-hover;
     }
   }
   .project-image {
@@ -151,6 +113,10 @@ export default {
     background-size: 100%;
     background-repeat: no-repeat;
     background-color: $blanquito-main;
+
+    @include breakpoint-down(md) {
+      display: none;
+    }
   }
   .project-content-wrapper {
     flex-basis: 60%;
@@ -163,7 +129,7 @@ export default {
       display: flex;
       flex-direction: column;
       flex-grow: 1;
-      @include breakpoint-down('md') {
+      @include breakpoint-down("md") {
         font-size: 13px;
       }
       .project-content-title {
@@ -176,7 +142,7 @@ export default {
           text-align: right;
           font-weight: 400;
           &:hover,
-          &:hover > .material-icons {
+          &:hover > .material-icons-outlined {
             background: -webkit-gradient(
               linear,
               left top,
@@ -195,7 +161,7 @@ export default {
           }
           color: inherit;
           text-decoration: none;
-          .material-icons {
+          .material-icons-outlined {
             font-size: 14px;
           }
         }
@@ -214,8 +180,10 @@ export default {
           border-radius: 15px;
           font-size: 11px;
           text-align: center;
-          text-shadow: 0px 0px 2px rgba(0, 0, 0, .8), 0px 1px 0px rgba(0, 0, 0, .8), 1px 0px 0px rgba(0, 0, 0, .8), 1px 1px 0px rgba(0, 0, 0, .8);
-          background: rgba(255, 255, 255, .3);
+          text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.8),
+            0px 1px 0px rgba(0, 0, 0, 0.8), 1px 0px 0px rgba(0, 0, 0, 0.8),
+            1px 1px 0px rgba(0, 0, 0, 0.8);
+          background: rgba(255, 255, 255, 0.3);
           color: white;
           white-space: nowrap;
           overflow: hidden;
@@ -223,16 +191,6 @@ export default {
           margin-bottom: 5px;
           &:not(:last-child) {
             margin-right: 5px;
-          }
-          &:hover {
-            .embedded-skill {
-              display: flex;
-            }
-          }
-          .embedded-skill {
-            box-shadow: 0px 0px 25px rgba(0, 0, 0, .2);
-            display: none;
-            position: absolute;
           }
         }
       }
@@ -245,14 +203,14 @@ export default {
         align-items: center;
         .project-details-button {
           &:hover {
-            background: rgba(255, 255, 255, .1);
+            background: rgba(255, 255, 255, 0.1);
           }
           border-radius: 2px;
           border: none;
           outline: none;
           cursor: pointer;
           padding: 10px 15px;
-          transition: .3s all ease;
+          transition: 0.3s all ease;
           background: transparent;
           text-transform: uppercase;
           text-align: right;

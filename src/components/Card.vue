@@ -1,33 +1,26 @@
 <template>
-  <transition
-    appear
-    name="fade-scale"
-  >
-    <div
-      class="card"
-      :class="{dark: darkMode}"
-    >
+  <transition appear name="fade-scale">
+    <div class="card" :class="{ dark: darkMode }">
       <slot />
     </div>
   </transition>
 </template>
 
-<script>
-import { mapState } from 'vuex'
+<script setup lang="ts">
+import { useAppStore } from "@/stores/app";
+import { toRefs } from "vue";
 
-export default {
-  name: 'Card',
-  computed: {
-    ...mapState(['darkMode'])
-  }
-}
+const { darkMode } = toRefs(useAppStore());
 </script>
 
 <style lang="scss" scoped>
-.fade-scale-enter-active, .fade-scale-leave-active {
+@import "@/assets/variables";
+.fade-scale-enter-active,
+.fade-scale-leave-active {
   transition: all 0.5s ease;
 }
-.fade-scale-enter, .fade-scale-leave-to {
+.fade-scale-enter-from,
+.fade-scale-leave-to {
   transform: scale(0) translateY(-200px);
   opacity: 0;
 }
@@ -41,13 +34,13 @@ export default {
     color: $blanquito-main;
   }
   &:hover {
-    box-shadow: 0px 0px 25px rgba(0, 0, 0, .1);
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1);
   }
   color: $colortexto;
   display: flex;
   background: $blanquito-secondary;
   transition: all 0.5s ease;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, .07);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.07);
   border-radius: 5px;
 }
 

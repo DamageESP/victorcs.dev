@@ -1,47 +1,31 @@
 <template>
   <section>
-    <h1 class="heading">
-      Mis proyectos
-    </h1>
-    <main class="projects">
+    <h2 class="section-title">Personal projects / demos</h2>
+    <section class="projects">
       <ProjectCard
-        v-for="(project, i) in projects"
+        v-for="(project, i) in orderedProjects"
         :key="i"
         :project="project"
-        @ver-detalle="verDetalle"
       />
-      <span class="others">... y muchos más. Algunos de ellos los puedes ver <a
-        target="_blank"
-        href="https://github.com/DamageESP"
-      >en mi perfil de github</a>.</span>
-    </main>
+    </section>
   </section>
 </template>
 
-<script>
+<script setup lang="ts">
 import projects from "../lib/projects";
+import ProjectCard from "@/components/ProjectCard.vue";
 
-import ProjectCard from "@/components/ProjectCard";
-
-export default {
-  name: "Projects",
-  components: { ProjectCard },
-  data() {
-    return {
-      projects,
-    };
-  },
-  methods: {
-    // TODO: Implement detail view
-    verDetalle(projectId) {
-      return projectId
-    }
-  }
-};
+const orderedProjects = projects.sort((p1, p2) =>
+  p1.order < p2.order ? -1 : 1
+);
 </script>
 
 <style lang="scss" scoped>
-.heading {
+@import "@/assets/variables.scss";
+.section-title {
+  font-weight: 800;
+  font-size: 28px;
+  line-height: 1;
   margin-bottom: 25px;
 }
 .projects {
@@ -57,14 +41,6 @@ export default {
   }
   @include breakpoint-down(xs) {
     grid-template-columns: 1fr;
-  }
-
-  .project {
-    cursor: pointer;
-  }
-  .others {
-    padding: 25px;
-    text-align: center;
   }
 }
 </style>

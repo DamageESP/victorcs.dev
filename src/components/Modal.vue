@@ -1,12 +1,6 @@
 <template>
-  <transition
-    appear
-    name="fade-scale"
-  >
-    <div
-      class="modal-wrapper"
-      @click="closeContactForm"
-    >
+  <transition appear name="fade-scale">
+    <div class="modal-wrapper" @click="closeContactForm">
       <Card class="modal">
         <slot />
       </Card>
@@ -14,28 +8,23 @@
   </transition>
 </template>
 
-<script>
-import Card from '@/components/Card'
+<script setup lang="ts">
+import Card from "@/components/Card.vue";
+import { useAppStore } from "@/stores/app";
+import { toRefs } from "vue";
 
-import { mapMutations } from 'vuex'
+const { contactForm } = toRefs(useAppStore());
 
-export default {
-  name: 'Modal',
-  components: { Card },
-  methods: {
-    closeContactForm (e) {
-      if (e.target.classList.contains('modal-wrapper')) {
-        this.toggleContactForm()
-      }
-      e.stopPropagation()
-    },
-    ...mapMutations(['toggleContactForm'])
+const closeContactForm = (e: MouseEvent) => {
+  if ((e.target as HTMLElement).classList.contains("modal-wrapper")) {
+    contactForm.value = !contactForm.value;
   }
-}
+  e.stopPropagation();
+};
 </script>
 
 <style lang="scss" scoped>
-.fade-scale-enter {
+.fade-scale-enter-from {
   opacity: 0;
 }
 
@@ -50,7 +39,7 @@ export default {
 
 .modal-wrapper {
   transition: all 0.2s ease;
-  background: rgba(0, 0, 0, .85);
+  background: rgba(0, 0, 0, 0.85);
   cursor: pointer;
   position: fixed;
   top: 0;

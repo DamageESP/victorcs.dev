@@ -1,12 +1,9 @@
 <template>
   <transition name="fade">
-    <nav
-      class="top-bar-wrapper"
-      :class="{dark: darkMode, scrolled}"
-    >
-      <div class="container nopadding">
+    <nav class="top-bar-wrapper" :class="{ dark: darkMode, scrolled }">
+      <div class="nopadding">
         <div class="top-bar">
-          <button
+          <!-- <button
             type="button"
             class="burger"
             @click="showMobileMenu = !showMobileMenu"
@@ -20,52 +17,40 @@
               role="img"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 448 512"
-            ><path
-              fill="currentColor"
-              d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"
-            /></svg>
-          </button>
-          <div
-            class="links"
-            :class="{showMobileMenu}"
-          >
-            <router-link
-              to="/"
-              class="link"
-              @click.native="showMobileMenu = false"
             >
-              <img
-                src="../assets/logo-50.webp"
-                alt="VíctorCS Logo"
-              >
-              <span>Inicio</span>
+              <path
+                fill="currentColor"
+                d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"
+              />
+            </svg>
+          </button>
+          <div class="links" :class="{ showMobileMenu }">
+            <router-link to="/" class="link" @click="showMobileMenu = false">
+              <img src="../assets/logo-50.webp" alt="VíctorCS Logo" />
+              <span>Home</span>
             </router-link>
             <router-link
               to="/about"
               class="link"
-              @click.native="showMobileMenu = false"
+              @click="showMobileMenu = false"
             >
-              <span>Sobre mí</span>
+              <span>About me</span>
             </router-link>
             <router-link
               to="/projects"
               class="link"
-              @click.native="showMobileMenu = false"
+              @click="showMobileMenu = false"
             >
-              <span>Proyectos</span>
+              <span>Projects</span>
             </router-link>
-            <!-- <router-link to="/snippets" class="link">
-              <span>Snippets</span>
-            </router-link> -->
-          </div>
+          </div> -->
           <div class="right-links">
             <button
-              v-ga="$ga.commands.trackContact.bind(this, 'Start - TopNav')"
-              class="material-icons pointer link"
+              class="material-icons-outlined pointer link"
               type="button"
               @click="toggleContactForm"
             >
-              mail_outline
+              email
             </button>
             <a
               class="link img"
@@ -74,9 +59,9 @@
               rel="noopener"
             >
               <img
-                :src="computedImageURL('social_linkedin.png')"
-                alt="Mi perfil en LinkedIn"
-              >
+                alt="My LinkedIn profile"
+                src="../assets/logos/social_linkedin.png"
+              />
             </a>
             <a
               class="link img especialito"
@@ -85,16 +70,12 @@
               rel="noopener"
             >
               <img
-                :src="computedImageURL('social_github.png')"
-                alt="Mi perfil en LinkedIn"
-              >
+                alt="My GitHub profile"
+                src="../assets/logos/social_github.png"
+              />
             </a>
-            <!-- <a class="link img" href="https://twitter.com/Victor26B" target="_blank" rel="noopener">
-              <img :src="computedImageURL('social_twitter.png')" alt="Mi perfil en LinkedIn">
-            </a> -->
             <button
-              v-ga="$ga.commands.trackDarkMode.bind(this, darkMode ? 'Disable' : 'Enable')"
-              class="material-icons pointer dark-mode-button"
+              class="material-icons-outlined pointer dark-mode-button"
               type="button"
               @click="toggleDarkMode"
             >
@@ -107,41 +88,33 @@
   </transition>
 </template>
 
-<script>
-import { mapState, mapMutations } from 'vuex'
+<script setup lang="ts">
+import { useAppStore } from "@/stores/app";
+import { onMounted, ref, toRefs } from "vue";
 
-export default {
-  name: 'TopNav',
-  data () {
-    return {
-      scrolled: false,
-      showMobileMenu: false,
-    }
-  },
-  computed: {
-    ...mapState(['darkMode'])
-  },
-  mounted () {
-    window.addEventListener('scroll', this.checkScrolled)
-  },
-  methods: {
-    ...mapMutations(['toggleDarkMode', 'toggleContactForm']),
-    computedImageURL (logoName) {
-      return require(`../assets/logos/${logoName}`)
-    },
-    checkScrolled () {
-      if (window.scrollY > 10) this.scrolled = true
-      else this.scrolled = false
-    }
-  },
-}
+const { darkMode } = toRefs(useAppStore());
+const { toggleDarkMode, toggleContactForm } = useAppStore();
+
+const scrolled = ref(false);
+
+const checkScrolled = () => {
+  if (window.scrollY > 10) scrolled.value = true;
+  else scrolled.value = false;
+};
+
+onMounted(() => {
+  window.addEventListener("scroll", checkScrolled);
+});
 </script>
 
 <style scoped lang="scss">
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
+@import "@/assets/variables";
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
 }
-.fade-enter, .fade-leave-to {
+.fade-enter-from,
+.fade-leave-to {
   opacity: 0;
 }
 
@@ -149,12 +122,12 @@ export default {
   &.dark {
     .top-bar {
       .links {
-        @include breakpoint-down('md') {
-          background: rgba($darkBG-hover, .9);
+        @include breakpoint-down("md") {
+          background: rgba($darkBG-hover, 0.9);
         }
       }
       .burger {
-        color: rgba($blanquito-main, .8);        
+        color: rgba($blanquito-main, 0.8);
       }
       .right-links {
         .dark-mode-button {
@@ -167,9 +140,9 @@ export default {
     }
   }
   &.scrolled {
-    background: rgba($blanquito-main, .8);
+    background: rgba($blanquito-main, 0.8);
     &.dark {
-      background: rgba($darkBG-main, .8);
+      background: rgba($darkBG-main, 0.8);
     }
   }
   .top-bar {
@@ -179,8 +152,8 @@ export default {
     justify-content: space-between;
     .burger {
       width: 30px;
-      color: rgba($darkBG-hover, .8);
-      @include breakpoint-up('md') {
+      color: rgba($darkBG-hover, 0.8);
+      @include breakpoint-up("md") {
         display: none;
       }
     }
@@ -188,12 +161,12 @@ export default {
       flex-grow: 1;
       display: flex;
       justify-content: flex-start;
-      
-      @include breakpoint-down('md') {
+
+      @include breakpoint-down("md") {
         flex-direction: column;
         position: absolute;
         top: 50px;
-        background: rgba($blanquito-secondary, .9);
+        background: rgba($blanquito-secondary, 0.9);
         padding: 10px;
         &:not(.showMobileMenu) {
           display: none;
@@ -207,11 +180,11 @@ export default {
         justify-content: center;
         align-items: center;
 
-        @include breakpoint-down('md') {
+        @include breakpoint-down("md") {
           padding: 8px 25px;
         }
 
-        @include breakpoint-up('md') {
+        @include breakpoint-up("md") {
           &:not(:last-child) {
             margin-right: 15px;
           }
@@ -219,10 +192,10 @@ export default {
         }
 
         &.router-link-exact-active {
-          background: rgba(255, 255, 255, .2);
+          background: rgba(255, 255, 255, 0.2);
         }
         &:hover {
-          background: rgba(255, 255, 255, .3);
+          background: rgba(255, 255, 255, 0.3);
         }
         img {
           width: 20px;
@@ -235,7 +208,7 @@ export default {
       .dark-mode-button {
         padding: 5px;
         border-radius: 50%;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, .07);
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.07);
         background: $blanquito-secondary;
       }
       .link {
@@ -256,7 +229,8 @@ export default {
     }
   }
   &.dark {
-    button, a {
+    button,
+    a {
       color: $blanquito-main;
     }
   }
