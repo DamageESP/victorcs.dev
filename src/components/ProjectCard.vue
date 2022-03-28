@@ -2,7 +2,7 @@
   <Card class="project" :class="{ vertical, dark: darkMode }">
     <a
       class="project-image"
-      :style="{ backgroundImage: `url(/src/assets/projects/${project.image})` }"
+      :style="{ backgroundImage: `url(${requireImage(project.image)})` }"
       :href="project.url || project.codeUrl"
       target="_blank"
       rel="noopener"
@@ -59,6 +59,9 @@ import Card from "@/components/Card.vue";
 import { getTechColor } from "@/lib/skills";
 import type { Project } from "@/lib/types";
 import { useAppStore } from "@/stores/app";
+
+const requireImage = (imageUrl: string) =>
+  new URL(`../assets/projects/${imageUrl}`, import.meta.url).href;
 
 defineProps({
   project: {
