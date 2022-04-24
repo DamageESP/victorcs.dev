@@ -26,6 +26,7 @@ export interface Job {
 
 export type Technology =
   | "Javascript"
+  | "Typescript"
   | "HTML5 & CSS3"
   | "Vue"
   | "React"

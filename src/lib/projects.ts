@@ -23,7 +23,7 @@ const projects: Project[] = [
     description:
       "Personal website developed with VueJS as a showcase and portfolio.",
     image: "victorcs.png",
-    technologies: ["Vue", "Javascript"],
+    technologies: ["Vue", "Javascript", "Typescript"],
   },
   {
     order: 2,

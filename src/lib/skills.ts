@@ -1,4 +1,4 @@
-import type { Skill } from "./types";
+const techColors = new Map();
 
 function getRandomColor() {
   const letters = "0123456789ABCDEF";
@@ -8,7 +8,6 @@ function getRandomColor() {
   }
   return color;
 }
-const techColors = new Map();
 
 export function getTechColor(techId?: string) {
   return (
@@ -20,36 +19,3 @@ export function getTechColor(techId?: string) {
     })()
   );
 }
-
-const skills: Skill[] = [
-  {
-    icon: "js.png",
-    name: "Javascript",
-  },
-  {
-    icon: "js.png",
-    name: "Ionic",
-  },
-  {
-    icon: "htmlcss.png",
-    name: "HTML5 & CSS3",
-  },
-  {
-    icon: "vue.png",
-    name: "Vue",
-  },
-  {
-    icon: "react.png",
-    name: "React",
-  },
-  {
-    icon: "node.jpg",
-    name: "Node",
-  },
-  {
-    icon: "express.png",
-    name: "Express",
-  },
-];
-
-export default skills;

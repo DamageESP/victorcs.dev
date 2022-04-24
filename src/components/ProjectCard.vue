@@ -13,7 +13,7 @@
           {{ project.name }}
           <template v-if="project.url">
             ·
-            <a :href="'//' + project.url" target="_blank" rel="noopener">
+            <a :href="project.url" target="_blank" rel="noopener">
               <i class="material-icons-outlined">open_in_new</i>
             </a>
           </template>
