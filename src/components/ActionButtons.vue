@@ -4,12 +4,7 @@
       ><span class="material-icons-outlined download-icon">email</span
       >Contact</boton
     >
-    <boton
-      type="link"
-      href="//victorcs.dev/cv.pdf"
-      accent="blue"
-      class="action-button"
-    >
+    <boton type="link" href="cv.pdf" accent="blue" class="action-button">
       <span class="material-icons-outlined download-icon">file_download</span
       >Download CV</boton
     >
